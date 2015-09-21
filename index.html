@@ -86,7 +86,7 @@
 			function time (args) {
                var x = args[0];
                console.log("time() called with " + x);
-			   alert("time");
+			   //alert("time");
                return "frankie hahah";
             }
             session.register('com.example.time', time).then(
@@ -146,7 +146,7 @@
 
 		$scope.android = function() {
             console.log("ready to android: ");  
-            globalSess.call('com.android.ping2', ["frankie hhah"]).then(
+            globalSess.call('com.android.ping2', [$scope.yourname]).then(
                 function (res) {
                     console.log("lock() result:", res);
                     $scope.androidstr1 = res;
