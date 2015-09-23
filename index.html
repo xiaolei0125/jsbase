@@ -5,6 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>VIA</title>
 
+	<style type="text/css">
+		body, html {width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
+		#allmap{width:100%;height:50%;}
+		p{margin-left:5px; font-size:14px;}
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=piCl9wFNZm9mvFqyG8j1e4Cp"></script>
+
+
         <script src="http://cdn.bootcss.com/angular.js/1.4.5/angular.js"></script>
                 <script>AUTOBAHN_DEBUG = false;</script>
                 <script src="http://autobahn.s3.amazonaws.com/autobahnjs/latest/autobahn.min.jgz"></script>
@@ -26,6 +34,18 @@
 
         } */
 
+	function display(lng, lat){
+            // 百度地图API功能
+            var map = new BMap.Map("allmap");    // 创建Map实例
+			var ggPoint = new BMap.Point(lng,lat);
+            //map.centerAndZoom(new BMap.Point(lng, lat), 22); 
+			map.centerAndZoom(ggPoint, 22); 
+			//初始化地图,设置中心点坐标和地图级别
+            map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
+            map.setCurrentCity("北京");          // 设置地图显示的城市 此项是必须设置的
+            map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+            }
+			
     var app = angular.module('myApp', []);
     app.controller('MyController', 
 		function($scope) { 
@@ -145,11 +165,14 @@
         };
 
 		$scope.android = function() {
-            console.log("ready to android: ");  
-            globalSess.call('com.android.ping2', [$scope.yourname]).then(
+            console.log("ready to android: "); 
+						
+            globalSess.call('android.map', [$scope.yourname]).then(
                 function (res) {
                     console.log("lock() result:", res);
-                    $scope.androidstr1 = res;
+                    $scope.androidstr1 = ""+res.args[0]+" "+res.args[1];
+					display(res.args[0], res.args[1]);
+					//display(114.40218313236,30.516890016035);
                 },
                 function (err) {
                      console.log("android() click error:", err);
@@ -165,6 +188,15 @@
         var timer = setInterval(function() {    $scope.$apply(updateClock);  }, 3000);  
         updateClock();
 
+		$scope.map1 = function(lng, lat){
+            // 百度地图API功能
+            var map = new BMap.Map("allmap");    // 创建Map实例114.398581246, 30.514), 22); 
+            map.centerAndZoom(new BMap.Point(lng, lat), 22); 
+			//初始化地图,设置中心点坐标和地图级别
+            map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
+            map.setCurrentCity("北京");          // 设置地图显示的城市 此项是必须设置的
+            map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+            }
     });
 	
 	</script>
@@ -173,6 +205,7 @@
     <body>
         
                 Console Center:
+				<div id="allmap"></div>
         <hr>
        
                 <div ng-controller="MyController">
@@ -185,6 +218,7 @@
                 <h5>{{ mystr3 }}  <button ng-click="lock()"> 锁屏</button></h5>
 				</br>
                 <h5> <button ng-click="android()"> 安卓测试</button>  {{ androidstr1 }}   </h5>
+				<h5> <button ng-click="map1()"> 地图显示</button> </h5>
                 </div>
     </body>
 </html>
