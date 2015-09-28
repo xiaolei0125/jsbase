@@ -90,10 +90,13 @@
                }
             );
 
+			
 			function on_android (args) {
-                console.log("on_webhook received: " +args[0].body);
+                console.log("location received: " +args[0]);
+				console.log("location received: " +args[1]);
+				display(args[1], args[0]);
             }
-            session.subscribe('com.android.topic', on_android).then(
+            session.subscribe('android.topic.location', on_android).then(
                function (sub) {
                   console.log('subscribed  android. to topic');
                },
@@ -188,15 +191,10 @@
         var timer = setInterval(function() {    $scope.$apply(updateClock);  }, 3000);  
         updateClock();
 
-		$scope.map1 = function(lng, lat){
-            // 百度地图API功能
-            var map = new BMap.Map("allmap");    // 创建Map实例114.398581246, 30.514), 22); 
-            map.centerAndZoom(new BMap.Point(lng, lat), 22); 
-			//初始化地图,设置中心点坐标和地图级别
-            map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
-            map.setCurrentCity("北京");          // 设置地图显示的城市 此项是必须设置的
-            map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
-            }
+		$scope.publishEvent = function(){
+           console.log("publish event to android: "); 
+		   globalSess.publish('android.event', ['map']);
+        }
     });
 	
 	</script>
@@ -218,7 +216,7 @@
                 <h5>{{ mystr3 }}  <button ng-click="lock()"> 锁屏</button></h5>
 				</br>
                 <h5> <button ng-click="android()"> 安卓测试</button>  {{ androidstr1 }}   </h5>
-				<h5> <button ng-click="map1()"> 地图显示</button> </h5>
+				<h5> <button ng-click="publishEvent()"> 发送地图消息</button> </h5>
                 </div>
     </body>
 </html>
