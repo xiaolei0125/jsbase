@@ -1,0 +1,82 @@
+﻿<!doctype html>
+<html ng-app="myApp">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>VIA</title>
+	
+        <script src="http://cdn.bootcss.com/angular.js/1.4.5/angular.js"></script>
+		<script src="mqttws31.js"></script>
+		<script>AUTOBAHN_DEBUG = false;</script>
+		<script src="http://autobahn.s3.amazonaws.com/autobahnjs/latest/autobahn.min.jgz"></script>
+		<script>
+	var app = angular.module('myApp', []);
+	app.controller('MyController', 
+	function($scope) {  
+		$scope.person = { name: "Ari Lerner" }; 
+		var globalClient;
+		
+	    // Create a client instance
+        client = new Paho.MQTT.Client("iot.eclipse.org", Number(80), "clientId");
+		
+        globalClient = client;
+		
+        // set callback handlers
+        client.onConnectionLost = onConnectionLost;
+        client.onMessageArrived = onMessageArrived;
+        
+        // connect the client
+        client.connect({onSuccess:onConnect});
+        
+        // called when the client connects
+        function onConnect() {
+          // Once a connection has been made, make a subscription and send a message.
+          console.log("onConnect");
+          client.subscribe("/World222");
+          message = new Paho.MQTT.Message("Hello");
+          message.destinationName = "/World222";
+          client.send(message); 
+        }
+        
+        // called when the client loses its connection
+        function onConnectionLost(responseObject) {
+          if (responseObject.errorCode !== 0) {
+            console.log("onConnectionLost:"+responseObject.errorMessage);
+          }
+        }
+        
+        // called when a message arrives
+        function onMessageArrived(message) {
+          console.log("onMessageArrived:"+message.payloadString);
+        }
+				
+		$scope.send = function() {
+			console.log("ready to send: "+$scope.yourname);  
+			
+			message = new Paho.MQTT.Message($scope.yourname);
+            message.destinationName = "/World222";
+		  
+			globalClient.send(message);
+		};
+		
+		
+	});
+	   </script>
+	  
+    </head>
+    <body>
+        
+		Console Center:
+        <hr>
+       		
+		<div ng-controller="MyController">
+		Hello {{yourname || mystr ||'World'}}!
+		<h5>{{ clock }} </h5>
+		<h5>{{ mystr }} </h5>
+		<h5>{{ mystr2 }} </h5>
+		Your name: <input type="text" ng-model="yourname" placeholder="World">
+		<button ng-click="send()"> 发送</button>
+		<h5>{{ mystr3 }}  <button ng-click="lock()"> 锁屏</button></h5>
+		</div>		
+    </body>
+</html>
