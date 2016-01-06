@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<html manifest="" lang="en-US">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>投票</title>
+
+<div id='wx_pic' style='margin:0 auto;display:none;'>
+<img src='/media/h3cVote/linkcover.jpg' />
+</div>
+
+<!-- import touch css and js 
+
+<link rel="stylesheet" href="touch/resources/css/sencha-touch.css" type="text/css">
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> 
+<script type="text/javascript" src="touch/src/chart/PolarChart.js"></script>
+--> 
+
+
+<link rel="stylesheet" href="touch/resources/css/sencha-touch.css" type="text/css">
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> 
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> 
+
+<script type="text/javascript" src="touch/sencha-touch.js"></script>
+<script type="text/javascript" src="package/app.js"></script>
+
+  
+    <style type="text/css">
+    .normal_btn
+    {
+	font-size: 20px;
+    alignment-adjust: central;
+    alignment-baseline: middle;
+	width: 110px;
+	height: 15px; //大小不起左右，titlebar随font-size: 25px;增大而增大	
+	cursor: hand;
+	border: none;
+    //border-color: green;
+	font-family:宋体;
+    background: transparent;
+	//background-image: url(images/but_bg.gif);
+	color: white;
+    }
+    
+    .gray_btn
+    {
+	font-size: 20px;
+    alignment-adjust: central;
+    alignment-baseline: middle;
+	width: 110px;
+	height: 15px; //大小不起左右，titlebar随font-size: 25px;增大而增大	
+	cursor: hand;
+	border: none;
+    //border-color: green;
+	font-family:宋体;
+    background: transparent;
+	//background-image: url(images/but_bg.gif);
+	color: black;
+    }
+    
+     
+ .x-msgbox
+ {
+    //font-size: 20px;
+    //alignment-adjust: central;
+    //alignment-baseline: middle;
+	//width: 110px;
+	//height: 15px; 
+	//cursor: hand;
+	//border: none;
+    border-color: #04BD00;
+	font-family:宋体 !important;
+    background: white;  //#B3B3B3;
+	//background-image: url(images/but_bg.gif);
+	//color: black !important;
+    
+   
+ }
+
+ .x-msgbox-text {
+    text-align: left !important;
+    //line-height: 1.2em !important;
+    color: #2B2B2B !important;
+    font-size: 17px !important;
+    text-shadow: none !important;
+    //font-size:1.0em !important;
+    //font-family:Arial !important;
+}
+    
+.x-title { 
+    color: black !important;
+    text-shadow: none !important;
+    //font-size: 21px !important;
+    //font-family: Arial !important;
+}
+
+  
+.customField input::-webkit-input-placeholder {
+    color: #2e4bc5;
+}  
+     
+
+.x-tab-normal {
+        //background-color: white !important;
+        background-color:#15202d;
+        background-repeat:no-repeat; 
+        //background-position:50% 50%; 
+        //width:48px;
+        background-image:none;
+        color: gray !important;
+      }
+      
+.x-tab-active {
+        //background-image:url(http://famfamfam.com/lab/icons/silk/icons/eye.png)!important;
+        background-image:none;
+        color: green !important;
+}
+
+
+
+.x-list .x-list-disclosure:before {  
+  //position: absolute;
+  //bottom: 8px ;
+  //top: 0px ;
+  //right: 5px ; 
+  //left: 0px ;
+  
+  content: '投票' !important; /*默认是']',显示的是箭头图标*/
+  //font-family: none !important;
+  font-size: 15px !important;  /*字体大小，可生效*/
+  color: #fff;
+  background-color: #04BD00 !important;
+  text-align: center;
+  line-height: 35px;
+  text-shadow: none !important;
+      
+}
+
+
+.x-list .x-list-item-tpl .x-list-disclosure {
+  position: absolute !important;
+  right: 15px !important;
+  top: 5px !important;
+  //bottom: 18px !important;
+  //top: auto !important; 
+}
+
+
+.x-list .x-list-disclosure {
+   // position: absolute !important;
+    //right: 3px !important;
+   // bottom: 8px !important; 
+   // top: 0px !important;
+   
+    overflow: visible  !important;
+    //-webkit-mask: 0 0 url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAUCAYAAACEYr13AAAAAXNSR0IArs4c6QAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wGBwQ7Dme80Q4AAAAdaVRYdENvbW1lbnQAAAAAAENyZWF0ZWQgd2l0aCBHSU1QZC5lBwAAAKBJREFUOMvtU7ENAyEQM0i0DJMMxggnNoCKhpWyBxVINBQUlyrRJwKeKF0Ul9bZ8vl0wO8ixshExGdzYkSGEDilBKUUeu+w1oqZgRyRrTUAQO8dSimskkydnXNcSgGAZRKx2s97zznnpYlcGRhjnsOzdeTGQa5Hk60SHyAiaK1vH5/xIOZa6wv/3oH4RjxcgYguu+JVAt4R46TArV/4A7gDIZZWTRQC+PUAAAAASUVORK5CYII=') no-repeat;
+    //-webkit-mask-size: 4.2em;
+    //-webkit-mask-image: url('../media/1.png') !important;
+    //background-color: #04BD00 !important;
+    //background-image: -webkit-linear-gradient(#939393,#000000);
+    //background-image: linear-gradient(#939393,#000000);
+    //background-image: url('../media/1.png') !important; 
+     
+    width: 2.8em !important;   
+    height: 1.6em !important;
+    //bottom: 30%;
+}
+
+
+
+/*
+
+.x-list-item .x-list-disclosure { 
+//overflow: hidden; 
+-webkit-mask: 0 0 url('../wxpay/text_edit.png') no-repeat; 
+-webkit-mask-box-image: url('../wxpay/text_edit.png') !important;
+-webkit-mask-size: 10.5em 4.5em; 
+
+//background: #04BD00 !important; 
+//background-image: url(http://hz.byodwork.cn/media/1.png) !important;
+//icon:  url(http://hz.byodwork.cn/media/1.png) !important;
+
+//width: 7.5em; 
+//height: 7.5em; 
+}
+
+*/
+
+        
+</style>
+    
+    <!-- The line below must be kept intact for Sencha Command to build your application -->
+    <!-- <script id="microloader" type="text/javascript" src=".sencha/app/microloader/development.js"></script> -->
+</head>
+<body>
+  
+</body>
+</html>

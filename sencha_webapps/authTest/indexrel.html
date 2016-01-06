@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html manifest="" lang="en-US">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>H3C巡展问卷</title> 
+<!-- import touch css and js 
+<link rel="stylesheet" href="touch/resources/css/sencha-touch.css" type="text/css">
+--> 
+<link rel="stylesheet" href="touch/resources/css/sencha-touch.css" type="text/css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> 
+<script type="text/javascript" src="touch/sencha-touch.js"></script>
+<script type="text/javascript" src="./package/app.js"></script>
+
+<style type="text/css">
+    .normal_btn
+    {
+	font-size: 20px;
+    alignment-adjust: central;
+    alignment-baseline: middle;
+	width: 110px;
+	height: 15px; //大小不起左右，titlebar随font-size: 25px;增大而增大	
+	cursor: hand;
+	border: none;
+    //border-color: green;
+	font-family:宋体;
+    background: transparent;
+	//background-image: url(images/but_bg.gif);
+	color: white;
+    }
+    
+    .gray_btn
+    {
+	font-size: 20px;
+    alignment-adjust: central;
+    alignment-baseline: middle;
+	width: 110px;
+	height: 15px; //大小不起左右，titlebar随font-size: 25px;增大而增大	
+	cursor: hand;
+	border: none;
+    //border-color: green;
+	font-family:宋体;
+    background: transparent;
+	//background-image: url(images/but_bg.gif);
+	color: black;
+    }
+    
+.selectfield 
+{
+display: block;
+
+.x-label-align-left {
+    &:first-child {
+      .x-form-label {
+        @if $include-border-radius { @include border-top-right-radius($form-fieldset-radius); }
+      }
+    }
+
+    &:last-child {
+      .x-form-label {
+        @if $include-border-radius { @include border-bottom-left-radius(0); }
+      }
+    }        
+}
+
+.x-form-label {
+    span {
+      font-size: 14px;
+    }
+}    
+
+.x-component-outer {
+    &:after {
+        margin-top: .5em;
+    }
+    &:before {
+        background: none;
+    }
+    .x-field-input{
+        font-size: 14px;
+    }
+}
+
+}
+
+</style>
+
+<style type="text/css">
+    .normal_toolbar
+    {
+	font-size: 12px;
+	//width: 95px;
+	height: 30px;	
+	cursor: hand;
+	border: gold;
+	font-family:宋体;
+    background: transparent;
+	//background-image: url(images/but_bg.gif);
+	color: red;
+    }
+</style>
+
+</head>
+<body>
+    <div id="appLoadingIndicator">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</body>
+</html>
