@@ -1,0 +1,39 @@
+# this is an example of the Uber API
+# as a demonstration of an API spec in YAML
+swagger: '2.0'
+info:
+  title: Uber API
+  description: Move your app forward with the Uber API
+  version: "1.0.0"
+# the domain of the service
+#host: wh.xiaolei.site:8100
+host: hz2.byodwork.cn:8081
+# array of all schemes that your API supports
+schemes:
+  - http
+# will be prefixed to all paths
+basePath: /
+produces:
+  - application/json
+paths:
+  /laser/config:
+    get:
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: "hi"
+  /pub:
+    get:
+      parameters:
+        - name: topic
+          in: query
+          type: string
+        - name: msg
+          in: query
+          type: string
+      produces:
+        - text/plain
+      responses:
+        '200':
+          description: "hi"
